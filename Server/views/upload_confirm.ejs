@@ -50,7 +50,7 @@
           readOnly: false,
 
           // min count
-          minCount: 1,
+          minCount: 0,
 
           // error message
           minCountErrorMessage: '',
@@ -80,13 +80,12 @@
           choice: function () {},
 
           // custom props
-          extendProps: ['name']
+          extendProps: []
 
         });
 
         function updateSearch() {
           $.post('users/findName', { name: $('#signatories_search').val() }, function(result) {
-            console.log($('#signatories_search').val(), result, $('.demo'))
             $('.demo').data('dropdown').update(result, false);
           })
         }
