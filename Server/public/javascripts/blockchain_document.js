@@ -5,7 +5,7 @@ let addDocToBC = function(hash, signature) {
 	$.get('http://localhost:3000/artifacts/DigitalSignature.json', function(response) {
 		const DigitalSignature = window.web3.eth
 			.contract(response.abi)
-			.at('0xe3b85723334b5F02033AC28A74Cf6f302Af8F2de');
+			.at('0x2c21c063A7FE059259f6c1F0e656c7E8Db8C0dAD');
 		DigitalSignature.addDocument.sendTransaction(
 			hash,
 			signature,
@@ -23,7 +23,7 @@ let addSignature = function(hash, signature) {
 	$.get('http://localhost:3000/artifacts/DigitalSignature.json', function(response) {
 		const DigitalSignature = window.web3.eth
 			.contract(response.abi)
-			.at('0xe3b85723334b5F02033AC28A74Cf6f302Af8F2de');
+			.at('0x2c21c063A7FE059259f6c1F0e656c7E8Db8C0dAD');
 		DigitalSignature.addSignature.sendTransaction(
 			hash,
 			signature,

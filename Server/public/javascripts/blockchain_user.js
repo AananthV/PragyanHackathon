@@ -1,6 +1,6 @@
 var addUserToBC = function(user_id, user_name) {
 	$.get('http://localhost:3000/artifacts/User.json', function(response) {
-		const UserContract = window.web3.eth.contract(response.abi).at('0xc8fEb1931EB3b70F03e432745FCf45B2490c5F89');
+		const UserContract = window.web3.eth.contract(response.abi).at('0x839e8A067D7ECbBC8DcA096abAa75e78b88d6275');
 		UserContract.setUser.sendTransaction(
 			user_id,
 			user_name,
@@ -9,7 +9,7 @@ var addUserToBC = function(user_id, user_name) {
 			},
 			function(error, result) {
 				console.log(result);
-				window.location = 'http://localhoast:3000/registration_success/' + result;
+				window.location = 'http://localhost:3000/registration_success/' + result;
 			}
 		);
 	});
