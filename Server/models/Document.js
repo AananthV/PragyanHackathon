@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const documentSchema = new mongoose.Schema({
     hash: String,
-    user: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
     },

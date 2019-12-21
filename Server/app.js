@@ -23,6 +23,14 @@ app.set('view engine', 'ejs');
 
 mongoose.connect('mongodb://localhost/abcdB');
 
+app.use(
+	session({
+		secret: 'Poda baadu I\'m not telling you',
+		resave: false,
+		saveUninitialized: true
+	})
+)
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({
@@ -37,14 +45,6 @@ app.use('/', userRouter);
 app.use('/', authRouter);
 app.use('/', uploadRouter);
 app.use('/', signRouter);
-
-app.use(
-	session({
-		secret: 'Poda baadu I\'m not telling you',
-		resave: false,
-		saveUninitialized: true
-	})
-)
 
 // default options
 
