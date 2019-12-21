@@ -5,13 +5,13 @@ const fileUpload = require('express-fileupload');
 
 router.use(fileUpload());
 
-router.get('/upload', function(req, res, next) {
+router.get('/upload', function (req, res, next) {
 	res.render('upload');
 });
 
 // default options
 
-router.post('/upload', function(req, res) {
+router.post('/upload', function (req, res) {
 	console.log('upload post');
 	console.log(req.files);
 
@@ -25,13 +25,15 @@ router.post('/upload', function(req, res) {
 	console.log(sampleFile);
 
 	// Use the mv() method to place the file somewhere on your server
-	sampleFile.mv(`./files/${sampleFile.name}`, function(err) {
+	sampleFile.mv(`./files/${sampleFile.name}`, function (err) {
 		if (err) return res.status(500).send(err);
 
 		sha256File(`./files/${sampleFile.name}`, (error, sum) => {
 			if (error) return console.log(error);
 			console.log(sum);
-			return res.status(200).send(sum);
+			return res.render('upload_confirm', {
+				document_hash: sum
+			})
 		});
 	});
 });
