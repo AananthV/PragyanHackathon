@@ -5,10 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var sha256File = require('sha256-file');
+var session = require('express-session')
 
 const fileUpload = require('express-fileupload');
 
 var indexRouter = require('./routes/index');
+var userRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var uploadRouter = require('./routes/upload');
 
@@ -29,8 +31,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/', userRouter);
 app.use('/', authRouter);
 app.use('/', uploadRouter);
+
+app.use(
+  session({
+    secret: 'Poda baadu I\'m not telling you',
+    resave: false,
+    saveUninitialized: true
+  })
+)
 
 // default options
 

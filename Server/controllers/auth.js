@@ -21,3 +21,14 @@ exports.register = (req, res) => {
     )
   })
 }
+
+exports.login = (req, res) => {
+  User.find({ email: req.body.email }, function(err, user) {
+    bcrypt.compare(req.body.password, user.password_hashed, function(err, res) {
+      if (res == true) {
+        req.session.user_id = user._id;
+      }
+      return res.render('index', { title: 'Express' })
+    });
+  })
+}
