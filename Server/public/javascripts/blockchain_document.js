@@ -14,6 +14,7 @@ let addDocToBC = function(hash, signature) {
 			},
 			function(error, result) {
 				console.log(result);
+				window.location = 'http://localhost:3000/upload_success/' + result;
 			}
 		);
 	});
@@ -32,6 +33,7 @@ let addSignature = function(hash, signature) {
 			},
 			function(error, result) {
 				console.log(result);
+				window.location = 'http://localhost:3000/sign_success/' + result;
 			}
 		);
 	});
