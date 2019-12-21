@@ -29,6 +29,7 @@ app.use(express.urlencoded({
 }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/files', express.static(path.join(__dirname, 'files')));
 
 app.use('/', indexRouter);
 app.use('/', userRouter);
