@@ -13,8 +13,12 @@
 <body>
 
     <!-- <embed src="./files/resume.pdf" width="800px" height="2100px" /> -->
-    <button name="approved" type="button" onclick="sendSign()">Approved</button>
-    <button name="declined" type="submit">Declined</button>
+    <div class="container">
+        <embed src="files/<%= document_hash %>.pdf" width="800px" height="600px" />
+        <br><br>
+        <button name="approved" type="button" class="btn btn-primary" onclick="sendSign()">Approved</button>
+        <button name="declined" type="submit" class="btn btn-warning">Declined</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
