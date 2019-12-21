@@ -36,11 +36,11 @@ app.use('/', authRouter);
 app.use('/', uploadRouter);
 
 app.use(
-  session({
-    secret: 'Poda baadu I\'m not telling you',
-    resave: false,
-    saveUninitialized: true
-  })
+	session({
+		secret: 'Poda baadu I\'m not telling you',
+		resave: false,
+		saveUninitialized: true
+	})
 )
 
 // default options
