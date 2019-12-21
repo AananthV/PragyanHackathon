@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index');
 var userRouter = require('./routes/users');
 var authRouter = require('./routes/auth');
 var uploadRouter = require('./routes/upload');
+var signRouter = require('./routes/sign');
 
 var app = express();
 
@@ -35,6 +36,7 @@ app.use('/', indexRouter);
 app.use('/', userRouter);
 app.use('/', authRouter);
 app.use('/', uploadRouter);
+app.use('/', signRouter);
 
 app.use(
 	session({
