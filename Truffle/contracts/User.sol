@@ -1,8 +1,8 @@
-pragma solidity >=0.4.25 <0.6.0;
+pragma solidity >=0.5.12 <0.6.0;
 
 contract User {
 
-    sturct user {
+    struct user {
         uint user_id;
         bytes32 name;
     }
