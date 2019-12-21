@@ -14,7 +14,10 @@
 
     <!-- <embed src="./files/resume.pdf" width="800px" height="2100px" /> -->
     <div class="container">
-        <embed src="files/<%= document_hash %>.pdf" width="800px" height="600px" />
+        <h1>Signature request</h1>
+        <br>
+        <p>Your signature is requested for the following document</p>
+        <embed src="../files/<%= document_hash %>.pdf" width="800px" height="600px" />
         <br><br>
         <button name="approved" type="button" class="btn btn-primary" onclick="sendSign()">Approved</button>
         <button name="declined" type="submit" class="btn btn-warning">Declined</button>
