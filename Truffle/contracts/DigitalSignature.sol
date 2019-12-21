@@ -1,14 +1,14 @@
 pragma solidity >=0.5.12 <0.6.0;
 
 contract DigitalSignature {
-    
+
     struct Document {
         address document_owner;
         mapping (address => bytes) signatures;
     }
-    
-    mapping (bytes32 => Document) documents;
-    
+
+    mapping (bytes32 => Document) public documents;
+
     function addDocument(bytes32 hash, bytes memory signature) public {
         require (verify(hash, signature));
         documents[hash].document_owner = msg.sender;
@@ -45,9 +45,9 @@ contract DigitalSignature {
       // If the version is correct return the signer address
       if (v != 27 && v != 28) {
         return false;
-      } 
+      }
 
-      return ecrecover(hash, v, r, s) == msg.sender; 
+      return ecrecover(hash, v, r, s) == msg.sender;
     }
 
 }
