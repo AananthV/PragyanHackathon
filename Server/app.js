@@ -22,6 +22,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+router.get('/login', function(req, res, next) {
+  res.render('login');
+});
+
+router.get('/register', function(req, res, next) {
+  res.render('register');
+});
+
+router.get('/upload', function(req, res, next) {
+  res.render('upload');
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
