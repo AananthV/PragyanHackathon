@@ -32,6 +32,7 @@ router.post('/upload', function (req, res) {
 					hash: sum,
 					owner: req.session.user_id
 				}, function(err, document) {
+					console.log(req.session.user_id);
 					return res.render('upload_confirm', {
 						document_hash: sum
 					})

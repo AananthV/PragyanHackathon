@@ -1,8 +1,6 @@
 const User = require('../models/User.js')
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
-const myPlaintextPassword = 's0/\/\P4$$w0rD';
-const someOtherPlaintextPassword = 'not_bacon';
 
 exports.register = (req, res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err, hash) {
@@ -24,11 +22,11 @@ exports.register = (req, res) => {
 
 exports.login = (req, res) => {
   User.find({ email: req.body.email }, function(err, user) {
-    bcrypt.compare(req.body.password, user.password_hashed, function(err, response) {
-      if (response == true) {
-        req.session.user_id = user._id;
+    bcrypt.compare(req.body.password, user[0].password_hashed, function(err, response) {
+      if (response) {
+        req.session.user_id = user[0]._id;
       }
-      return res.render('index', { title: 'Express' })
+      return res.render('index', { title: 'Login Successful' })
     });
   })
 }
