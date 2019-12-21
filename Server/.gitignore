@@ -4,6 +4,7 @@
 
 ### Node ###
 # Logs
+public/artifacts
 files
 logs
 *.log
