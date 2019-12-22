@@ -13,7 +13,7 @@ let addDocToBC = function (hash, signature) {
 			},
 			function (error, result) {
 				console.log(result);
-				if (typeof(result) != 'undefined')
+				if (typeof (result) != 'undefined')
 					window.location = 'http://localhost:3000/upload_success/' + result;
 				window.location = 'http://localhost:3000/dashboard';
 			}
@@ -33,7 +33,7 @@ let addSignature = function (hash, signature) {
 			},
 			function (error, result) {
 				console.log(result);
-				if (typeof(result) != 'undefined')
+				if (typeof (result) != 'undefined')
 					window.location = 'http://localhost:3000/sign_success/' + result;
 				window.location = 'http://localhost:3000/dashboard';
 			}

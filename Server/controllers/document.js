@@ -6,10 +6,26 @@ exports.getDocumentsSign = (req, res, next) => {
 
     Document.find({
         signatories: req.session.user_id
-    }, function (err, doc_to_be_signed) {
-        console.log(err);
-        req.doc_to_be_signed = doc_to_be_signed;
-        next();
+    }, function (err, respo) {
+        console.log(respo);
+        doc_to_be_signed = [];
+        counter = 0;
+        respo.forEach(function (doc) {
+            Signature.find({
+                user: req.session.user_id,
+                document: doc._id
+            }, function (error, response) {
+                console.log(response);
+                if (response.length == 0) {
+                    doc_to_be_signed.push(doc);
+                }
+                counter++;
+                if (counter == respo.length) {
+                    req.doc_to_be_signed = doc_to_be_signed;
+                    next();
+                }
+            })
+        });
     })
 }
 
