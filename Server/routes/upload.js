@@ -1,10 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var sha256File = require('sha256-file');
-var pdfUtil = require('pdf-to-text');
 const fileUpload = require('express-fileupload');
 const fs = require('fs');
-const nlp = require('compromise');
 Document = require('../models/Document');
 
 

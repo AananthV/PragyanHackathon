@@ -12,7 +12,6 @@
 
 <body>
 
-    <%= docs_to_be_signed %>
     <ul>
         <h2>Your Uploads: </h2>
         <% docs_uploaded.forEach(function(document){ %>
@@ -20,7 +19,6 @@
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">idk</h5>
                     <p class="card-text"><%= document.message %></p>
                     <a href="files/<%= document.hash %>.pdf" class="btn btn-primary" download>Download</a>
                 </div>
@@ -36,9 +34,8 @@
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">idk</h5>
                     <p class="card-text"><%= document.message %></p>
-                    <a href="files/<%= document.hash %>.pdf" class="btn btn-primary" download>Download</a>
+                    <a href="sign/<%= document.hash %>" class="btn btn-primary">View</a>
                 </div>
             </div>
         </li>
