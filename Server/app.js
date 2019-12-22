@@ -25,17 +25,19 @@ mongoose.connect('mongodb://localhost/abcdB');
 
 app.use(
 	session({
-		secret: 'Poda baadu I\'m not telling you',
-		resave: false,
-		saveUninitialized: true
+		secret            : "Poda baadu I'm not telling you",
+		resave            : false,
+		saveUninitialized : true
 	})
-)
+);
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({
-	extended: false
-}));
+app.use(
+	express.urlencoded({
+		extended : false
+	})
+);
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/files', express.static(path.join(__dirname, 'files')));
@@ -49,12 +51,12 @@ app.use('/', signRouter);
 // default options
 
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function(req, res, next) {
 	next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function(err, req, res, next) {
 	// set locals, only providing error in development
 	res.locals.message = err.message;
 	res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -63,5 +65,8 @@ app.use(function (err, req, res, next) {
 	res.status(err.status || 500);
 	res.render('error');
 });
+
+//testing the mail api
+//sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = app;
