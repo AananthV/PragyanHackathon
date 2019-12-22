@@ -54,21 +54,25 @@
       type: 'ajax',
 
       // ajax options
-      ajaxOptions: {},
+      ajaxOptions: {
+        success: function(data) {
+          console.log("mum", data)
+        }
+      },
 
       // unique id
       id: 'id',
-
-      name: 'signatories',
 
       // generate input[type="hidden"]?
       hidden: false,
 
       // data format
-      format: 'name%',
+      format: '%name%',
+
+      fields: ['name'],
 
       // input format
-      inputFormat: '',
+      inputFormat: '%name%',
 
       // max number of results
       maxShow: 5,
@@ -91,12 +95,6 @@
       // true = no limit
       maxItem: true,
 
-      // show multiple skins
-      showMultiSkin: true,
-
-      // multiple styles
-      multiStyle: {},
-
       // multiple fields
       multiField: 'name',
 
@@ -104,21 +102,7 @@
       focusShow: false,
 
       // text when no results
-      noResult: '',
-
-      // custom skin
-      skin: '',
-
-      // callbacks
-      disableRule: function (data) {
-        return false;
-      },
-      success: function ($input, data) {
-        return true;
-      },
-      afterDelete: function ($input, data) {
-        return true;
-      }
+      noResult: 'No Results',
 
     });
 
