@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var router = express.Router();
 const Document = require('../models/Document');
 const Signature = require('../models/Signature');
+const User = require('../models/User')
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey('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');
 
@@ -27,16 +28,17 @@ router.post('/sign', function (req, res) {
 			document[0].signatories = [];
 			console.log(req.body);
 			for (let user of req.body.signatories) {
-				console.log(user);
-				// Set up functions to notify user here.
-				const msg = {
-					to: user.email,
-					from: 'forusage1741@gmail.com',
-					subject: 'Your signature is required',
-					text: `click here to sign the api localhoast:3000/sign/${req.body.hash}`,
-					html: `<strong>click here to sign the api localhoast:3000/sign/${req.body.hash}</strong>`
-				};
-				sgMail.send(msg);
+				User.findById(user, function (err, usr) {
+					console.log(usr);
+					// Set up functions to notify user here.
+					const msg = {
+						to: usr.email,
+						from: 'forusage1741@gmail.com',
+						subject: 'Your signature is required',
+						html: `<strong>Click <a href="http://localhost:3000/sign/${req.body.hash}">here</a> to sign</strong>`
+					};
+					sgMail.send(msg);
+				})
 				document[0].signatories.push(mongoose.Types.ObjectId(user));
 			}
 			document[0].message = req.body.message;
