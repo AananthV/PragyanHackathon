@@ -29,6 +29,22 @@
         <% }); %>
     </ul>
 
+    <ul>
+        <h2>To Be Signed: </h2>
+        <% docs_to_be_signed.forEach(function(document){ %>
+        <li>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">idk</h5>
+                    <p class="card-text"><%= document.message %></p>
+                    <a href="files/<%= document.hash %>.pdf" class="btn btn-primary" download>Download</a>
+                </div>
+            </div>
+        </li>
+        <% }); %>
+    </ul>
+
     <button type="button" onclick="location.href = './upload';">Upload</button>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>

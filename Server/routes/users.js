@@ -5,7 +5,7 @@ var userController = require('../controllers/user.js')
 var documentController = require('../controllers/document.js')
 
 /* GET users listing. */
-router.get('/users/getAll', userController.getAll);
-router.get('/dashboard', documentController.getDocumentsUploaded, documentController.getDocumentsSign);
+router.post('/users/findName', userController.findUsersLike);
+router.get('/dashboard', documentController.getDocumentsSign, documentController.getDocumentsUploaded);
 
 module.exports = router;

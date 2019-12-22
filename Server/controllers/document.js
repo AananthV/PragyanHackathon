@@ -5,6 +5,7 @@ exports.getDocumentsSign = (req, res, next) => {
     Document.find({
         signatories: req.session.user_id
     }, function (err, doc_to_be_signed) {
+        console.log(err);
         req.doc_to_be_signed = doc_to_be_signed;
         next();
     })
@@ -13,7 +14,7 @@ exports.getDocumentsSign = (req, res, next) => {
 exports.getDocumentsUploaded = (req, res) => {
     console.log(req.session.user_id)
     Document.find({
-        user: req.session.user_id
+        owner: req.session.user_id
     }, function (err, documents) {
         return res.render('dashboard', {
             docs_uploaded: documents,

@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
 var sha256File = require('sha256-file');
-var session = require('express-session')
+var session = require('express-session');
 
 const fileUpload = require('express-fileupload');
 
