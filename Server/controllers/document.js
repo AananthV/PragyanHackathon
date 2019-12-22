@@ -1,3 +1,4 @@
+const User = require('../models/User.js')
 const Document = require('../models/Document.js')
 const Signature = require('../models/Signature.js')
 
@@ -34,20 +35,42 @@ exports.getSignatories = (req, res) => {
         response[0].signatories.forEach(function (user_id) {
             Signature.find({
                 user: user_id,
-                document: req.params.documentHash
+                document: response[0]._id
             }, function (error, resp) {
-                if (resp.count() != 0) {
-                    signatures.append({
-                        'status': "signed",
-                        'signature': resp[0].signature,
-                        'name': resp[0].user.name
-                    });
+                console.log(resp)
+                if (resp.length > 0) {
+                    User.find({
+                        _id: user_id
+                    }, function (err, user) {
+                        signatures.push({
+                            'status': "signed",
+                            'signature': resp[0].signature,
+                            'name': user[0].name
+                        });
+                        if (signatures.length == response[0].signatories.length) {
+                            return res.render('document', {
+                                signatures: signatures,
+                                document_hash: req.params.documentHash
+                            })
+                        }
+                    })
                 } else {
-                    signatures.append({
-                        'status': "pending",
-                        'signature': "",
-                        'name': user_id.name
-                    });
+                    User.find({
+                        _id: user_id
+                    }, function (err, user) {
+                        signatures.push({
+                            'status': "pending",
+                            'signature': '',
+                            'name': user[0].name
+                        });
+                        if (signatures.length == response[0].signatories.length) {
+                            return res.render('document', {
+                                signatures: signatures,
+                                document_hash: req.params.documentHash
+                            })
+                        }
+                    })
+                    console.log(signatures)
                 }
             });
         });

@@ -2,149 +2,151 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Document</title>
-    <link href="stylesheets/jquery.magicsearch.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Document</title>
+  <link href="stylesheets/jquery.magicsearch.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="col-md-6 m-auto">
-        <div class="card card-body mt-5">
-            <h2 class="text-center">Complete your Upload</h2>
-            <form method="post" onsubmit="registerUser(); return false;">
-                <div class="form-group">
-                    <label>Message: (To Accompany the document)</label>
-                    <input
-                        type="textarea"
-                        class="form-control"
-                        name="message"
-                    />
-                </div>
-                <embed src="files/<%= document_hash %>.pdf" width="800px" height="600px" />
-                <div class="demo form-group">
-                  <input class="magicsearch" id="signatories" placeholder="search names...">
-                </div>
-                <div class="form-group">
-                  <button type="button" class="btn btn-success" onclick="sendDocument()" name="button">Sign and Send</button>
-                </div>
-            </form>
+  <div class="col-md-6 m-auto">
+    <div class="card card-body mt-5">
+      <h2 class="text-center">Complete your Upload</h2>
+      <form method="post" onsubmit="registerUser(); return false;">
+        <div class="form-group">
+          <label>Message: (To Accompany the document)</label>
+          <input type="textarea" class="form-control" name="message" />
         </div>
+        <embed src="files/<%= document_hash %>.pdf" width="800px" height="600px" />
+        <div class="demo form-group">
+          <input class="magicsearch" id="signatories" placeholder="search names...">
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-success" onclick="sendDocument()" name="button">Sign and Send</button>
+        </div>
+      </form>
     </div>
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+  </script>
 
-    <script src="javascripts/blockchain.js"></script>
-    <script src="javascripts/blockchain_document.js"></script>
-    <script src="javascripts/upload.js"></script>
-    <script src="javascripts/jquery.magicsearch.js"></script>
+  <script src="javascripts/blockchain.js"></script>
+  <script src="javascripts/blockchain_document.js"></script>
+  <script src="javascripts/upload.js"></script>
+  <script src="javascripts/jquery.magicsearch.js"></script>
 
-    <script type="text/javascript">
-      $('#signatories').magicsearch({
+  <script type="text/javascript">
+    $('#signatories').magicsearch({
 
-        // array or string or function or url (for AJAX)
-        dataSource: 'users/getAll',
+      // array or string or function or url (for AJAX)
+      dataSource: 'users/getAll',
 
-        // 'ajax'
-        type: 'ajax',
+      // 'ajax'
+      type: 'ajax',
 
-        // ajax options
-        ajaxOptions: {},
+      // ajax options
+      ajaxOptions: {},
 
-        // unique id
-        id: 'id',
+      // unique id
+      id: 'id',
 
-        name: 'signatories',
+      name: 'signatories',
 
-        // generate input[type="hidden"]?
-        hidden: false,
+      // generate input[type="hidden"]?
+      hidden: false,
 
-        // data format
-        format: '%name%',
+      // data format
+      format: 'name%',
 
-        // input format
-        inputFormat:'',
+      // input format
+      inputFormat: '',
 
-        // max number of results
-        maxShow: 5,
+      // max number of results
+      maxShow: 5,
 
-        // clear the input when no option is selected
-        isClear: true,
+      // clear the input when no option is selected
+      isClear: true,
 
-        // show selected options
-        showSelected: true,
+      // show selected options
+      showSelected: true,
 
-        // show dropdown button
-        dropdownBtn: false,
+      // show dropdown button
+      dropdownBtn: false,
 
-        // max number of results in the dropdown
-        dropdownMaxItem: 8,
+      // max number of results in the dropdown
+      dropdownMaxItem: 8,
 
-        // multiple select
-        multiple: true,
+      // multiple select
+      multiple: true,
 
-        // true = no limit
-        maxItem: true,
+      // true = no limit
+      maxItem: true,
 
-        // show multiple skins
-        showMultiSkin: true,
+      // show multiple skins
+      showMultiSkin: true,
 
-        // multiple styles
-        multiStyle: {},
+      // multiple styles
+      multiStyle: {},
 
-        // multiple fields
-        multiField: 'name',
+      // multiple fields
+      multiField: 'name',
 
-        // show on focus
-        focusShow: false,
+      // show on focus
+      focusShow: false,
 
-        // text when no results
-        noResult: '',
+      // text when no results
+      noResult: '',
 
-        // custom skin
-        skin: '',
+      // custom skin
+      skin: '',
 
-        // callbacks
-        disableRule: function(data) {
-          return false;
-        },
-        success: function($input, data) {
-          return true;
-        },
-        afterDelete: function($input, data) {
-          return true;
-        }
-
-      });
-
-      function sendDocument() {
-        let data = {
-          message: $('input[name="message"]').val(),
-          signatories: $('#signatories').attr('data-id').split(','),
-          hash: "<%= document_hash %>"
-        }
-        window.web3.eth.sign(window.web3.eth.accounts[0], "0x" + data.hash, function (error, result) {
-            if (!error) {
-                data.ownerSignature = result;
-                $.ajax({
-                    url: 'sign',
-                    type: 'POST',
-                    contentType: 'application/json',
-                    data: JSON.stringify(data)}
-                ).done(
-                 function(response) {
-                    addDocToBC('0x' + data.hash, data.ownerSignature);
-                })
-
-            } else {
-                console.log("yuck")
-            }
-        })
+      // callbacks
+      disableRule: function (data) {
+        return false;
+      },
+      success: function ($input, data) {
+        return true;
+      },
+      afterDelete: function ($input, data) {
+        return true;
       }
-    </script>
+
+    });
+
+    function sendDocument() {
+      let data = {
+        message: $('input[name="message"]').val(),
+        signatories: $('#signatories').attr('data-id').split(','),
+        hash: "<%= document_hash %>"
+      }
+      window.web3.eth.sign(window.web3.eth.accounts[0], "0x" + data.hash, function (error, result) {
+        if (!error) {
+          data.ownerSignature = result;
+          $.ajax({
+            url: 'sign',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data)
+          }).done(
+            function (response) {
+              addDocToBC('0x' + data.hash, data.ownerSignature);
+            })
+
+        } else {
+          console.log("yuck")
+        }
+      })
+    }
+  </script>
 </body>
 
 </html>

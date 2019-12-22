@@ -27,9 +27,7 @@ exports.login = (req, res) => {
       if (response == true) {
         req.session.user_id = user[0]._id;
       }
-      return res.render('index', {
-        title: 'Express'
-      })
+      return res.redirect('dashboard');
     });
   })
 }
