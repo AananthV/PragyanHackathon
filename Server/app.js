@@ -48,6 +48,10 @@ app.use('/', authRouter);
 app.use('/', uploadRouter);
 app.use('/', signRouter);
 
+app.get('/verify_hash', (req, res, next) => {
+	res.render('verify_hash');
+});
+
 // default options
 
 // catch 404 and forward to error handler
