@@ -7,5 +7,6 @@ var documentController = require('../controllers/document.js')
 /* GET users listing. */
 router.get('/users/getAll', userController.getAll);
 router.get('/dashboard', documentController.getDocumentsSign, documentController.getDocumentsUploaded);
+router.get('/dashboard/:documentHash', documentController.getSignatories)
 
 module.exports = router;
