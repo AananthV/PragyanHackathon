@@ -2,7 +2,6 @@ const mongoose = require('mongoose')
 
 const signatureSchema = new mongoose.Schema({
     signature: String,
-    transactionId: String,
     document: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Document'

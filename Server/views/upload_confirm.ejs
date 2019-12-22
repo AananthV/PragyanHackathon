@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <title>Document</title>
-    <link href="stylesheets/jquery.dropdown.css" rel="stylesheet">
+    <link href="stylesheets/jquery.magicsearch.css" rel="stylesheet">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
                 </div>
                 <embed src="files/<%= document_hash %>.pdf" width="800px" height="600px" />
                 <div class="demo form-group">
-                  <select style="display:none" class="form-control" name="signatories" id="signatories" multiple></select>
+                  <input class="magicsearch" id="signatories" placeholder="search names...">
                 </div>
                 <div class="form-group">
                   <button type="button" class="btn btn-success" onclick="sendDocument()" name="button">Sign and Send</button>
@@ -38,61 +38,112 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     <script src="javascripts/blockchain.js"></script>
+    <script src="javascripts/blockchain_document.js"></script>
     <script src="javascripts/upload.js"></script>
-    <script src="javascripts/jquery.dropdown.js"></script>
+    <script src="javascripts/jquery.magicsearch.js"></script>
 
-    <script>
-        var document_hash = "<%= document_hash %>";
+    <script type="text/javascript">
+      $('#signatories').magicsearch({
 
-        $('.demo').dropdown({
+        // array or string or function or url (for AJAX)
+        dataSource: 'users/getAll',
 
-          // read only
-          readOnly: false,
+        // 'ajax'
+        type: 'ajax',
 
-          // min count
-          minCount: 0,
+        // ajax options
+        ajaxOptions: {},
 
-          // error message
-          minCountErrorMessage: '',
+        // unique id
+        id: 'id',
 
-          // the maximum number of options allowed to be selected
-          limitCount: Infinity,
+        name: 'signatories',
 
-          // error message
-          limitCountErrorMessage: '',
+        // generate input[type="hidden"]?
+        hidden: false,
 
-          // search field
-          input: '<input type="text" id="signatories_search" oninput="updateSearch()" maxLength="20" placeholder="Search">',
+        // data format
+        format: '%name%',
 
-          // dynamic data here
-          data: [],
+        // input format
+        inputFormat:'',
 
-          // is search able?
-          searchable: true,
+        // max number of results
+        maxShow: 5,
 
-          // when there's no result
-          searchNoData: '<li style="color:#ddd">No Results</li>',
+        // clear the input when no option is selected
+        isClear: true,
 
-          // callback
-          init: function () {},
+        // show selected options
+        showSelected: true,
 
-          // callback
-          choice: function () {},
+        // show dropdown button
+        dropdownBtn: false,
 
-          // custom props
-          extendProps: []
+        // max number of results in the dropdown
+        dropdownMaxItem: 8,
 
-        });
+        // multiple select
+        multiple: true,
 
-        function updateSearch() {
-          $.post('users/findName', { name: $('#signatories_search').val() }, function(result) {
-            $('.demo').data('dropdown').update(result, false);
-          })
+        // true = no limit
+        maxItem: true,
+
+        // show multiple skins
+        showMultiSkin: true,
+
+        // multiple styles
+        multiStyle: {},
+
+        // multiple fields
+        multiField: 'name',
+
+        // show on focus
+        focusShow: false,
+
+        // text when no results
+        noResult: '',
+
+        // custom skin
+        skin: '',
+
+        // callbacks
+        disableRule: function(data) {
+          return false;
+        },
+        success: function($input, data) {
+          return true;
+        },
+        afterDelete: function($input, data) {
+          return true;
         }
 
-        function sendDocument() {
-          console.log($('form').serialize());
+      });
+
+      function sendDocument() {
+        let data = {
+          message: $('input[name="message"]').val(),
+          signatories: $('#signatories').attr('data-id').split(','),
+          hash: "<%= document_hash %>"
         }
+        window.web3.eth.sign(window.web3.eth.accounts[0], "0x" + data.hash, function (error, result) {
+            if (!error) {
+                data.ownerSignature = result;
+                $.ajax({
+                    url: 'sign',
+                    type: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data)}
+                ).done(
+                 function(response) {
+                    addDocToBC('0x' + data.hash, data.ownerSignature);
+                })
+
+            } else {
+                console.log("yuck")
+            }
+        })
+      }
     </script>
 </body>
 
