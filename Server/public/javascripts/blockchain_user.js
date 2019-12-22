@@ -9,7 +9,9 @@ var addUserToBC = function(user_id, user_name) {
 			},
 			function(error, result) {
 				console.log(result);
-				window.location = 'http://localhost:3000/registration_success/' + result;
+				if (typeof(result) != 'undefined')
+					window.location = 'http://localhost:3000/registration_success/' + result;
+				window.location = 'http://localhost:3000/dashboard';
 			}
 		);
 	});
