@@ -1,21 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+let createError = require('http-errors');
+let express = require('express');
+let path = require('path');
+let cookieParser = require('cookie-parser');
+let logger = require('morgan');
 const mongoose = require('mongoose');
-var sha256File = require('sha256-file');
-var session = require('express-session');
+let sha256File = require('sha256-file');
+let session = require('express-session');
 
 const fileUpload = require('express-fileupload');
 
-var indexRouter = require('./routes/index');
-var userRouter = require('./routes/users');
-var authRouter = require('./routes/auth');
-var uploadRouter = require('./routes/upload');
-var signRouter = require('./routes/sign');
+let indexRouter = require('./routes/index');
+let userRouter = require('./routes/users');
+let authRouter = require('./routes/auth');
+let uploadRouter = require('./routes/upload');
+let signRouter = require('./routes/sign');
 
-var app = express();
+let app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
